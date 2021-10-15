@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Empleado</title>
+</head>
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 100%;
+        background-image: url(logo.jpg), url(arbol.jfif);
+        background-position: center top, center bottom;
+        background-repeat: no-repeat, no-repeat;
+    }
+    form{
+        margin: 5% 20% 5% 20%;
+        padding: 5% 10% 10% 10%;
+    
+    }
+    input{
+        inline-size: 100%;  
+        
+    }
+    h1{
+        text-align: center;   
+    }
+    button{
+        border-radius: 15px;
+        padding: 1% 2% 1% 2%;
+        margin: 2% 2% 2% 2%;
+        background-color: rgb(188, 190, 192);
+    }
+    label{
+        text-align: right;
+    }
+    a{
+     text-decoration: none;
+     color: black;     
+    }
+</style>    
+<body>
+    <form action="" method="post">
+        
+        <h1>Editar Empleado</h1>
+       
+        <div>
+            <label for="Nombre"> <b> Nombre:</b></label>
+            <input type="text" name="Nombre" id="Nombre" value="Carlos Andres">
+        </div>
+        <div>
+            <label for="Apellidos"> <b>Apellidos:</b></label>
+            <input type="text" name="Apellidos" id="Apellidos" value="Santos Villanueva">
+        </div>
+        <div>
+            <label for="identificacion"><b>Identificación:</b></label>
+            <input type="text" name="identificacion" id="identificacion" value="102124545">
+        </div>
+        <div>
+            <label for="Correo"><b>Correo:</b></label>
+            <input type="text" name="Correo" id="Correo" value="ssss@hotmail.com">
+        </div>
+        <div>
+            <label for="direccion"><b>Dirección:</b></label>
+            <input type="text" name="direccion" id="direccion" value="cr 15 no 13-21">
+        </div>
+        <div>
+            <label for="telefono"><b>Teléfono:</b></label>
+            <input type="text" name="telefono" id="telefono" value="3000000000">
+            </div>
+        <div>
+            <label for="fec_Ingreso"><b>Fecha de Ingreso:</b></label>
+            <input type="text" name="fec_Ingreso" id="fec_Ingreso" value="07/10/2020">
+        </div>
+        <div>
+            <label for="Tipo_Contrato"><b>Tipo de contrato:</b></label>
+            <input type="text" name="Tipo_Contrato" id="Tipo_Contrato" value="Definido">
+        </div>
+        <div>
+            <label for="fec_Termino"><b>Fecha de terminación:</b></label>
+            <input type="text" name="fec_Termino" id="fec_Termino" value="07/10/2021">
+        </div>
+        <div>
+            <label for="Cargo"><b>Cargo:</b></label>
+            <input type="text" name="Cargo" id="Cargo" value="Analista">
+        </div>
+        <div>
+            <label for="Dependencia"><b>Dependencia:</b></label>
+            <input type="text" name="Dependencia" id="Dependencia" value="SAC">
+        </div>
+        <div>
+            <label for="Salario"><b>Salario:</b></label>
+            <input type="text" name="Salario" id="Salario" value="1000000">
+        </div>
+        <button onclick="guardar()"><b>Guardar</b></button>
+        <script>
+        function guardar() {
+        alert("Guardado con éxito");
+        }
+        </script>
+        <button onclick="cancelar()"><b>Cancelar</b></button>
+        <script>
+        function cancelar() {
+        alert("esta seguro que desea cancelar");
+        }
+        </script>
+
+        <button><b><a href="administrador">Volver al inicio</a></b></button>
+          
+</body>
+</html>

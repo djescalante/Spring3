@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>retroalimentación</title>
+</head>
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 100%;
+    }
+    textarea{
+        border-radius: 15px;
+       text-align: justify;
+        border-style: dotted;
+        background-color: rgb(222, 223, 224);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 100%;
+        margin: 2% 30% 2% 25%;
+        padding: 1% 1% 1% 1%;
+
+        
+    }
+    button{
+        border-radius: 15px;
+        padding: 1% 2% 1% 2%;
+        margin: 2% 2% 2% 2%;
+        background-color: rgb(188, 190, 192);
+        
+    }
+    a{
+     text-decoration: none;
+     color: black;      
+    }
+       
+</style>
+
+<body>
+   
+    <h1 style="text-align: center;";>Retroalimentación empleado</h1>
+    <br><br>
+    <div>
+    <textarea name="retroalimentacion" id="retroalimentacion" rows="20" cols="80"> </textarea>
+     
+</div>
+    <textarea name="calificación" id="calificacion" cols="10" rows="2" placeholder="puntaje....."></textarea>
+    <br>
+    <center>
+        <button onclick="guardar()">Guardar</button>
+        <script>
+        function guardar() {
+        alert("Guardado con éxito");
+        }
+        </script>
+        <button onclick="cancelar()">Cancelar</button>
+        <script>
+        function cancelar() {
+        alert("esta seguro que desea cancelar");
+        }
+        </script>
+
+    <button> <b><a href="administrador">Volver al inicio</a></b></button>
+       
+    </center>   
+</body>
+
+</html>

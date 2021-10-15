@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/50a16dfba4.js" crossorigin="anonymous"></script>
+    <title>SuperAdministrador</title>
+</head> 
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 100%;
+        
+    }
+    table {
+        font-family: arial, sans-serif;
+        border-color: aliceblue;
+        width: 180%;
+        text-align: justify;
+        font-size: 90%;
+        margin: 2% 2% 2% 2%;
+        padding: 2% 2% 2% 2%;
+        border-style: outset;
+        
+      }
+    button{
+        margin: 2% 3% 2% 3%;
+        padding: 1% 1.5% 1% 1.5%;
+        border-radius: 15px;
+        background-color: rgb(188, 190, 192);
+    }
+    header{
+        width: 100%;
+        position: fixed;
+    }   
+    .header-top{
+        width: 100%;
+        background: #378fd9;
+    }
+    .navegacion{
+        width: 90%;
+        max-width: 100%;
+        margin: auto;
+        padding: 12px 0px;
+    }
+    .search{
+        padding: 10px;
+        padding-right: 35px;
+        border: none;
+        
+    }  
+    a{
+        text-decoration: none;
+        padding: 2% 2% 2% 2%;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: justify;
+        margin: 2% 2% 2% 2%;
+        border-radius: 10px;
+        color: #378fd9;      
+    }
+</style>
+
+
+<header>
+    <div class="header-top">
+        <div class="navegacion">
+            <input type="search" placeholder="Buscar..." class="search">
+        </div>
+</header>
+<body>
+    <br>
+        <h1 style="margin: 5%;">Lista de empleados</h1>
+        
+			<form class="form-inline" method="get">
+				
+			</form>
+        <br>
+        <table class="">
+            <tr>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Fecha de Ingreso</th>
+                <th>Tipo de contrato</th>
+                <th>Fecha de terminacion</th>
+                <th>Cargo</th>
+                <th>Dependencia</th>
+                <th>Salario</th>
+                <th>Acción</th>
+    
+            </tr>
+            <tr>
+                <td>102124545</td>
+                <td>Carlos Andres</td>
+                <td>Santos Villanueva</label></b>
+                <td>ssss@hotmail.com</td>
+                <td>cr 15 no 13-21</td>
+                <td>3000000000</td>
+                <td>07/10/2020</td>
+                <td>Definido</td>
+                <td>07/10/2021 </td>
+                <td>Analista</td>
+                <td>SAC</td>
+                <td>1000000</td>
+                    <td> <a href='editar'><i class="fas fa-edit"></i>edit</a>
+                        <a href="administrador"><i class="fas fa-trash"></i>delete</a> 
+                      <a href="retroalimentacion"><i class="far fa-comment-alt"></i>message</a>
+                      <a href="superadministrador"><i class="fas fa-unlock"></i> Permisos</a>
+                     </td>
+                    
+                 </tr>
+             </table>
+     
+         </form>
+         <br>
+     
+         <button onclick="window.location.href='CrearEmpleado';"><b>Crear Empleado</b></button>
+         <button onclick="window.location.href='/';"><b> cerrar sesión</b></button>  
+        
+   
+    
+</body>
+</html>
