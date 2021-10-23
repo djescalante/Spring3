@@ -81,38 +81,47 @@
                 <th>Identificación</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
-                <th>Correo</th>
                 <th>Direccion</th>
-                <th>Telefono</th>
-                <th>Fecha de Ingreso</th>
-                <th>Tipo de contrato</th>
-                <th>Fecha de terminacion</th>
+                <th>Correo</th>
+                <th>Celular</th>
+                <th>Salario</th>
                 <th>Cargo</th>
                 <th>Dependencia</th>
-                <th>Salario</th>
-                <th>Acción</th>
+                <th>Tipo de contrato</th>
+                <th>perfil</th>
+                <th>Contraseña</th>
+                <th>Fecha de ingreso</th>
+                <th>Fecha de Terminación</th>
     
             </tr>
+
+            {% for row in rows %}
+
             <tr>
-                <td>102124545</td>
-                <td>Carlos Andres</td>
-                <td>Santos Villanueva</label></b>
-                <td>ssss@hotmail.com</td>
-                <td>cr 15 no 13-21</td>
-                <td>3000000000</td>
-                <td>07/10/2020</td>
-                <td>Definido</td>
-                <td>07/10/2021 </td>
-                <td>Analista</td>
-                <td>SAC</td>
-                <td>1000000</td>
+                <td>{{row["id_cedula"]}}</td>
+                <td>{{row["nombre"]}}</td>
+                <td>{{row["apellido"]}}</td>
+                <td>{{row["direccion"]}}</td>
+                <td>{{row["correo"]}}</td>
+                <td>{{row["celular"]}}</td>
+                <td>{{row["salario"]}}</td>
+                <td>{{row["nombre_cargo"]}}</td>
+                <td>{{row["nombre_dependencia"]}}</td>
+                <td>{{row["nombre_tipo_contrato"]}}</td>
+                <td>{{row["nombre_perfil"]}}</td>
+                <td>{{row["password"]}}</td>
+                <td>{{row["fecha_ingreso"]}}</td>
+                <td>{{row["fecha_termino"]}}</td>
+
+
                     <td> <a href='editar'><i class="fas fa-edit"></i>edit</a>
                         <a href="administrador"><i class="fas fa-trash"></i>delete</a> 
                       <a href="retroalimentacion"><i class="far fa-comment-alt"></i>message</a>
                       <a href="superadministrador"><i class="fas fa-unlock"></i> Permisos</a>
                      </td>
-                    
-                 </tr>
+            </tr>
+            {% endfor %}   
+            
              </table>
      
          </form>

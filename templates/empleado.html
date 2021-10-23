@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>empleado</title>
-</head>
+{% extends 'base.html' %}
 
 <style>
     
@@ -66,61 +59,77 @@
     }
 </style>    
 
-<body>
-    <nav><h1 style="margin-top: 3%; color: rgb(188, 190, 192);" >Bienvenidos a Portal Empleados </h1>  </nav>
-  
-    <h3 id="h3" style="text-align:center;">INFORMACIÓN PERSONAL</h3>
-   
-    <form id="form" action="/" method="get">
-        <div >
-            <label for="Nombre"> <b> Nombre: </label></b>
-            <label for=Nombre> Carlos Andres  </label> 
-            <label for="Apellidos"> <b> Apellidos: </label></b>
-            <label for= Apellidos> Santos Villanueva </label>
-            <label for="Correo"style=> <b> Correo: </label></b>
-            <label for= Correo> ssss@hotmail.com </label>
+
+{% block contenido  %}
+
+<h1> BIENVENIDO A PORTAL EMPLEADO</h1>
+<form action="" method="post">
+
+<center><h1>Información Personal</h1></center>
+<center>
+       <table class="">
+        <tr>
+            <th>Identificación</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Direccion</th>
+            <th>Correo</th>
+            <th>Celular</th>
+         </tr>
+
+        {% for row in rows %}
+
+        <tr>
+            <td>{{row["id_cedula"]}}</td>
+            <td>{{row["nombre"]}}</td>
+            <td>{{row["apellido"]}}</td>
+            <td>{{row["direccion"]}}</td>
+            <td>{{row["correo"]}}</td>
+            <td>{{row["celular"]}}</td>
+
+        </tr>
+        {% endfor %}   
         
-        </div>
-        <div>
-            <label for="identificacion"> <b> Identificación: </label></b>
-            <label for= identificacion> 102124545 </label>
-            <label for="Direccion"> <b> Dirección: </label></b>
-            <label for= Direccion> cr 15 no 13-21 </label>
-            <label for="Telefono"> <b> Teléfono: </label></b>
-            <label for= Telefono> 3000000000 </label>
-        </div>
+         </table>
+
+</center>
+</form>
+
+<form action="" method="post">
+
+    <center><h1>Información Laboral</h1></center>
+    <center>
+
+        <table class="">
+            <tr>
+                <th>Cargo</th>
+                <th>Dependencia</th>
+                <th>Tipo de contrato</th>
+                <th>Fecha de ingreso</th>
+                <th>Fecha de Terminación</th>
     
-    <h3 style="text-align:center">INFORMACIÓN LABORAL</h3>
+            </tr>
+        <tr>
+        {% for row in rows %}
+        
 
-        <div>
-            <label for="fec_Ingreso"> <b> Fecha de Ingreso: </label></b>
-            <label for=fec_Ingreso> 07/10/2020 </label> 
-            <label for="Tipo_Contrato"> <b> Tipo de contrato: </label></b>
-            <label for= Tipo_Contrato> Definido </label>
-            <label for="fec_Termino"style=> <b> Fecha de terminación: </label></b>
-            <label for= fec_Termino> 07/10/2021 </label>
-        </div>
-        <div>
-            <label for="Cargo"> <b> Cargo: </label></b>
-            <label for= Cargo> Analista </label>
-            <label for="Dependencia"> <b> Dependencia: </label></b>
-            <label for= Dependencia> SAC </label>
-            <label for="Salario"> <b> Salario: </label></b>
-            <label for= Salario> 1000000 </label>
-        </div>
-        <H4 style="text-align: left;" >RETROALIMENTACIÓN</H4>
-        <br>    
-        <p style="text-align: justify;">
-            el empleado ha presentado satisfactoriamente las metas propuestas
-        </p>
-        <div id="puntaje">
-        <label for="puntaje"> <b> Puntaje: </label></b>
-        <label for= puntaje > 100 </label>
-        </div>
-        
-        <button>cerrar Sesión</button>
-        
+        <td>{{row["salario"]}}</td>
+        <td>{{row["nombre_cargo"]}}</td>
+        <td>{{row["nombre_dependencia"]}}</td>
+        <td>{{row["nombre_tipo_contrato"]}}</td>
+        <td>{{row["fecha_ingreso"]}}</td>
+        <td>{{row["fecha_termino"]}}</td>
+
+        {% endfor %} 
+        </tr>
+  
+  </form>
+
+    <form action="/" method="get">
+    <input type="submit" value="cerrar sesion" title="cerrar sesion" class="btn btn-primary">
     </form>
-    </body>
 
-</html>
+
+
+{% endblock  %}
+

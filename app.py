@@ -1,68 +1,141 @@
-from flask import Flask, flash, request
+from flask import Flask, flash, request, redirect, url_for
 from flask import render_template as render
-from werkzeug.utils import redirect # importamos el render para poder utilijar jinja y plantillas html
-from forms import Formulario_Login
+from flask_wtf import form
+from werkzeug.utils import redirect
+from wtforms.form import Form # importamos el render para poder utilijar jinja y plantillas html
+from forms import flogin, fempleado, feditar
+from flask import flash
+import os
+import sqlite3 as sql
+from werkzeug.exceptions import RequestTimeout
+from db import get_db, close_db
+from flask import g
+
 app = Flask(__name__)
 
-#vamos a simular una lista de usuarios para aplicar la logica de nuestra pagina
+
+app.secret_key = os.urandom(24)
 
 
-lista_de_usuarios = ["empleado","administrador","superad"]
-lista_de_noticias = {
-    101:"Noticia 1",
-    102:"Noticia 2",
-    103:"Noticia 3",
-    104:"Noticia 4",
-    105:"Noticia 5",
-}
-
-
-@app.route('/', methods=["GET", "POST"]) #usamos un get porque solo estamos consultando la pagina principal no le estamos mandando informacion al servidor
+@app.route('/', methods=["GET", "POST"])
 def inicio():
-    try:
-        if request.method == 'POST':
-            usuario = request.form['usuario']
-            password = request.form['password']   
+    form = flogin(request.form)
+    if request.method == 'POST':
 
-            error = None
-            if not usuario:
-                error = "usuario incorrecto"
-                flash(error)
-            if not password:
-                error = 'La contraseña debe contener al menos una minúscula, una mayúscula, un número y 8 caracteres'
-                flash(error)       
 
-            if error is not None:
-                return redirect("InicioSesion") 
-            else:                           
-                if usuario == "administrador":
-                    return redirect ("administrador")
-                elif usuario =="superad":
-                    return redirect ("superadministrador")
+
+        usuario = request.form['usuario']
+        password = request.form['password']
+        perfil = request.form['perfil']
+
+        error = None
+        db = get_db()
+        
+        if not usuario:
+            error = "Usuario requerido."
+            flash( error )
+        if not password:
+            error = "Contraseña requerida."
+            flash( error )
+
+        if error is not None:
+            # SI HAY ERROR:
+            return render("inicioSesion.html", form=form, titulo='Inicio de sesión')
+        else:
+            # No hay error:
+            user = db.execute(
+                'SELECT * FROM usuarios WHERE id_cedula= ? AND password= ? AND id_perfil= ?'
+                ,
+                (usuario,password,perfil)
+            ).fetchone()            
+            if user is None:
+                error = "Usuario y contraseña no son correctos."
+                flash( error )                
+                return render ("inicioSesion.html", form=form, titulo='Inicio de sesión')
+            else:  
+                if perfil == '1':
+                    return redirect(url_for('empleado'))
+                elif perfil == '2':
+                     return redirect(url_for('administrador'))
                 else:
-                    return redirect ("empleado")
-            
-    except:
-        flash("Se generó un error en el proceso.")
-    
-    return render("InicioSesion.html") 
-    
+                    return redirect(url_for('superadministrador'))
+
+    # GET:
+    return render ("inicioSesion.html", form=form, titulo='Inicio de sesión')
+
+
+
        
-@app.route('/empleado', methods=["GET"])
+@app.route('/empleado', methods=["GET" , "POST"])
 def empleado():
-    return render("empleado.html") 
+
+    con = sql.connect("empleados.db")
+    
+    con.row_factory = sql.Row
+
+    cur = con.cursor()
+
+    cur.execute('SELECT id_cedula, nombre, apellido, direccion,correo, celular, salario, nombre_cargo, nombre_dependencia, nombre_tipo_contrato, fecha_ingreso,fecha_termino FROM usuarios JOIN cargo on cargo.id_cargo = usuarios.id_cargo JOIN dependencia on dependencia.id_dependencia = usuarios.id_dependencia JOIN tipo_contrato on tipo_contrato.id_tipo_contrato = usuarios.id_tipo_contrato JOIN perfil on perfil.id_perfil = usuarios.id_perfil WHERE id_cedula= ?',
+    (usuario))
+
+
+    rows = cur.fetchall()
+    return render ("empleado.html",rows=rows)
+
+
+
+
 
 @app.route('/administrador', methods=["GET", "POST"])
 def administrador():
-    return render("administrador.html") 
+    con = sql.connect("empleados.db")
+    con.row_factory = sql.Row
+
+    cur = con.cursor()
+
+    cur.execute("SELECT id_cedula, nombre, apellido, direccion,correo, celular, salario, nombre_cargo, nombre_dependencia, nombre_tipo_contrato, nombre_perfil,password, fecha_ingreso,fecha_termino FROM usuarios JOIN cargo on cargo.id_cargo = usuarios.id_cargo JOIN dependencia on dependencia.id_dependencia = usuarios.id_dependencia JOIN tipo_contrato on tipo_contrato.id_tipo_contrato = usuarios.id_tipo_contrato JOIN perfil on perfil.id_perfil = usuarios.id_perfil")
+
+    rows = cur.fetchall()
+    return render ("administrador.html",rows=rows)
+
+
+
+
 
 @app.route('/superadministrador', methods=["GET", "POST"])
 def superadministrador():
-    return render ("superadministrador.html")
+    con = sql.connect("empleados.db")
+    con.row_factory = sql.Row
+
+    cur = con.cursor()
+
+    cur.execute("SELECT id_cedula, nombre, apellido, direccion,correo, celular, salario, nombre_cargo, nombre_dependencia, nombre_tipo_contrato, nombre_perfil,password, fecha_ingreso,fecha_termino FROM usuarios JOIN cargo on cargo.id_cargo = usuarios.id_cargo JOIN dependencia on dependencia.id_dependencia = usuarios.id_dependencia JOIN tipo_contrato on tipo_contrato.id_tipo_contrato = usuarios.id_tipo_contrato JOIN perfil on perfil.id_perfil = usuarios.id_perfil")
+
+    rows = cur.fetchall()
+    return render ("superadministrador.html",rows=rows)
+    
+
+
+
 
 @app.route('/editar', methods=["GET", "POST"])
 def editar():
-    return render ("editar.html")
+    form = feditar( request.form )
+    if request.method == 'POST':        
+        flash( form.enombre.data)
+        flash( form.eapellidos.data)
+        flash( form.ecorreo.data )
+        flash( form.eidentificacion.data)
+        flash( form.edireccion.data )
+        flash( form.etelefono.data )
+        flash( form.efechaingreso.data)
+        flash( form.etipocontrato.data)
+        flash( form.efechaterminacion.data )
+        flash( form.ecargo.data)
+        flash( form.edependencia.data )
+        flash( form.esalario.data )
+        return render("editar.html", form=form)
+    return render ("editar.html", form=form)
 
 @app.route('/CrearEmpleado', methods=["GET", "POST"])
 def CrearEmpleado():
@@ -74,6 +147,11 @@ def perfil():
     return render("retroalimentacion.html")
 
 
+
+
+
+
 if __name__ == "__main__":
+
     app.run(debug = True)
     
